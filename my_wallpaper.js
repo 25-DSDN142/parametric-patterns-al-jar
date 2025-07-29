@@ -8,8 +8,8 @@ angleMode(DEGREES);
 
 
 function setup_wallpaper(pWallpaper) {
-  // pWallpaper.output_mode(DEVELOP_GLYPH);
-  pWallpaper.output_mode(GRID_WALLPAPER);
+  pWallpaper.output_mode(DEVELOP_GLYPH);
+  // pWallpaper.output_mode(GRID_WALLPAPER);
   
   pWallpaper.resolution(FIT_TO_SCREEN);
   pWallpaper.show_guide(true); //set this to false when you're ready to print
@@ -27,76 +27,62 @@ function wallpaper_background() {
 }
 
 function my_symbol() { // do not rename this function. Treat this similarly to a Draw function
-//colours
-let purple = color(194, 130, 237);
-let green = color(209, 245, 159);
-let yellow = color(240, 240, 170);
+  noFill();
+  
+  let purple = color(194, 130, 237);
+  let green = color(209, 245, 159);
+  let yellow = color(240, 240, 170);
+  //colours
 
 
 //guildines
-stroke(255);
+stroke(yellow);
 strokeWeight(0.2);
 line(0,0,200,200);//up to down
 line(0,200,200,0);//down to up
-// line(midX,0,midX,200);//vertical
-// line(0,midY,200,midY);//horizontal
 
 
 let size = 200;
-// star();
-
-
-// fill(green);
-noFill();
-strokeWeight(4);
 
 
 
-stroke(purple)
+strokeWeight(2);
 ellipse(midX,midY,size);
 
-for (let y = 0; y < 11; y++){
-  // line(y - midY, midY - y, midX, y);
-  line(midX,midY,  20*y, 0);
-  line(midX,midY, 0, 20*y);
-
-  line(midX,midY,20*y,200);
-  line(midX,midY,200,20*y);
-}
+starBurst(3);
 
 stroke(green)
-// line(midX,midY,midX,midY*2);
-// line(midX-midX,midY-midY,midX,midY);
-// line(midX+midX,midY-midY,midX,midY);
-
-
-
 strokeWeight(1)
 }
 
-function star(){
-    //star
-  beginShape();
-  //top
-  vertex(midX,midY-80);//point
-  vertex(midX*2-(midX/4)*3,80);
-  
-  //right
-  vertex(midX*2-20,midY-midY/10);//point
-  vertex(140,125);
+function starBurst(starBu){
+  // let starBu = 8;
+  let around = 180/starBu;
 
-  //bottom right
-  vertex(midX*2-midX/2,midY*2-20);//point
-  vertex(midX,145);
+  strokeWeight(4);
+push();
+  translate(midX,midY);
+  for (let y = 0; y < starBu; y++){
+    rotate(around);
+    line(-midX+25, -midY+25, midX-25, midY-25);
 
-  //bottom left
-  vertex(midX/2,midY*2-20);//point
-  vertex(60,125);
+  stroke(255);
+  strokeWeight(2);
+  beginShape()
   
-  //left
-  vertex(midX-midX+20,midY-midY/10);//point
-  vertex(75,80);
-  
-  endShape();
+  push();
+  curveVertex(-midX+25, -midY+25);
+  rotate(around);
+  curveVertex(-midX+25, -midY+25);
+pop();
+
+  endShape(CLOSE);
+ 
+  }
+
+pop();
+
+
 
 }
+
